@@ -1,6 +1,8 @@
 
 # Alert: Admin Activities / Scheduled Task / Executable
 
+<img width="929" height="453" alt="alert_example" src="https://github.com/user-attachments/assets/6812f14a-1bab-472d-a3d7-681b528f7bd9" />
+
 ## Alert 1 — New Admin Added (High)
 **SPL:** (A)
 index=botsv3 (EventCode=4720 OR EventCode=4728 OR EventCode=4732)
