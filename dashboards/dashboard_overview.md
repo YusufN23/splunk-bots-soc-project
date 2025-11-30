@@ -1,7 +1,6 @@
 # Dashboard: SOC Monitoring — 4 panels (A→D)
 
-## Dashboard name
-SOC-Monitoring-MITRE
+## SOC-Monitoring-MITRE Dashboard
 
 ## Panel 1 — New Admin Events (A)
 - Query:
