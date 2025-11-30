@@ -14,8 +14,6 @@ MITRE: T1078 (Valid Accounts) / T1134 (Access Token Manipulation / account manag
 What to look for: who created the account, which account was added to which group, host name, and timestamps.
 
 B. Persistence via Scheduled Task / Service Creation (EventCode 4698 / 7045)
-
- 
 index=botsv3 (EventCode=4698 OR EventCode=7045)
 | table _time, Account_Name, TaskName, ServiceName, host
 | sort -_time
@@ -24,8 +22,6 @@ MITRE: T1053 (Scheduled Task/Job) / T1050 (New Service)
 What to look for: new task/service names, which account created them, and host.
 
 C. Suspicious Login Times / Anomalous Logons (EventCode 4624)
-
- 
 index=botsv3 EventCode=4624
 | eval hour=strftime(_time,"%H")
 | stats count by Account_Name, hour
@@ -36,8 +32,6 @@ MITRE: T1078 (Valid Accounts)
 What to look for: account names logging in at odd hours and frequency.
 
 D. Executable Creation / Potential Malware Dropped (EventCode 4663)
-
- 
 index=botsv3 EventCode=4663 Object_Type="File" Object_Name="*.exe"
 | table _time, Account_Name, Object_Name, Object_Path, host
 | sort -_time
@@ -46,8 +40,6 @@ MITRE: T1204 (User Execution), T1059 (Execution)
 What to look for: new executables, suspicious paths (temp folders, user profiles), user who created it.
 
 E. Suspicious Network Connections / External Beaconing (netflow/firewall logs)
-
- 
 index=botsv3 sourcetype=*netflow* OR sourcetype=*firewall*
 | stats count by src_ip, dest_ip, dest_port
 | where count > 5
@@ -56,7 +48,7 @@ Explanation: Identifies hosts making repeated connections to the same external d
 MITRE: T1071 (Application Layer Protocol)
 What to look for: dest_ip with high counts, unusual dest_ports, matching hosts.
 
- 
+
 
 **Important run notes (read before running any search):**
 
