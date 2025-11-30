@@ -1,52 +1,66 @@
-A. Failed login brute-force (EventCode=4625)
+# SPL Queries — splunk-bots-soc-project
+Index: botsv3
+Timepicker: set to a window that includes data (All time initially)
 
-index=botsv3 EventCode=4625
-| stats count by Account_Name, src_ip, host
-| sort -count
-| head 50
+---
 
-Explanation: finds accounts with many failed logins and top source IPs.
-
-
-
-B. Successful login after multiple failures (detects credential stuffing or compromised account)
-
-index=botsv3 (EventCode=4624 OR EventCode=4625)
-| transaction Account_Name maxspan=10m
-| search EventCode=4624
-| where mvcount(EventCode=4625) > 5
-| table _time, Account_Name, src_ip, host, EventCode
-
-Explanation: transaction collects related events within timeframe; we flag accounts that had >5 failures then a success.
-
-
-
-C. New local admin / privilege creation (EventCode=4728/4720/4732 depending)
-
+## A. New Local Admin / Privilege Escalation
+**SPL**
 index=botsv3 (EventCode=4720 OR EventCode=4728 OR EventCode=4732)
 | table _time, Account_Name, Target_Account, Group_Name, host
 | sort -_time
 
-Explanation: reveals admin account creations or group adds — a common persistence/escalation sign.
+**Explanation:** Detects when a new admin is created or an account is added to a privileged group. This often indicates attacker privilege escalation or persistence after compromise.
 
+**MITRE:** T1078 (Valid Accounts) / T1134 (Access Token Manipulation — related escalation behavior)
 
+---
 
-D. Suspicious PowerShell / commandline usage (process spawn)
-
-index=botsv3 sourcetype=WinEventLog:Security EventCode=4688
-CommandLine="*powershell*" OR CommandLine="*Invoke-Expression*" OR CommandLine="*b64*"
-| table _time, Account_Name, CommandLine, host, src_ip
+## B. Executable Creation / Potential Malware Dropped
+**SPL**
+index=botsv3 EventCode=4663 Object_Type="File" Object_Name="*.exe"
+| table _time, Account_Name, Object_Name, Object_Path, host
 | sort -_time
 
-Explanation: Command line abuse often indicates attacker execution.
+**Explanation:** Detects creation/modification of .exe files. Attackers frequently drop executables (payloads) on hosts; spotting new or unexpected executables is a high-value signal.
 
+**MITRE:** T1204 (User Execution), T1059 (Execution)
 
+---
 
-E. External C2 beaconing (network logs if present)
-
-index=botsv3 sourcetype="*netflow*" OR sourcetype="*firewall*"
-| stats count by dest_ip, dest_port, src_ip
-| where count > 50
+## C. Suspicious Login Times / Anomalous Logons
+**SPL**
+index=botsv3 EventCode=4624
+| eval hour=strftime(_time,"%H")
+| stats count by Account_Name, hour
+| where count > 3 AND (hour < 6 OR hour > 20)
 | sort -count
 
-Explanation: high volume to an external IP/port could be beaconing.
+**Explanation:** Identifies accounts that log in multiple times outside normal business hours. Compromised accounts are often used at odd hours.
+
+**MITRE:** T1078 (Valid Accounts)
+
+---
+
+## D. Persistence via Scheduled Task / Service Creation
+**SPL**
+index=botsv3 (EventCode=4698 OR EventCode=7045)
+| table _time, Account_Name, TaskName, ServiceName, host
+| sort -_time
+
+**Explanation:** Detects scheduled task or service creation — common persistence mechanism used by attackers to survive reboots or maintain access.
+
+**MITRE:** T1053 (Scheduled Task/Job), T1050 (New Service)
+
+---
+
+## E. Suspicious Network Connections / External Beaconing
+**SPL**
+index=botsv3 sourcetype=*netflow* OR sourcetype=*firewall*
+| stats count by src_ip, dest_ip, dest_port
+| where count > 5
+| sort -count
+
+**Explanation:** High frequency outbound connections to the same external IP/port can indicate Command & Control (C2) or data exfiltration. Threshold set low (5) for demo/dataset sensitivity; tune in production.
+
+**MITRE:** T1071 (Application Layer Protocol)
