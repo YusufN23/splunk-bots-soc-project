@@ -8,13 +8,13 @@ This playbook provides a standardized process for investigating and responding t
 2. Scope
 This playbook applies to the following detection types:
 
-1. New Local Admin / Privilege Escalation Events
+- New Local Admin / Privilege Escalation Events
 EventCode 4720, 4728, 4732
-2. Scheduled Task or Service Creation (Persistence)
+- Scheduled Task or Service Creation (Persistence)
 EventCode 4698, 7045
-3. Suspicious Login Times / Anomalous Logons
+- Suspicious Login Times / Anomalous Logons
 EventCode 4624
-4. Executable File Creation (Potential Malware Drop)
+- Executable File Creation (Potential Malware Drop)
 EventCode 4663 with Object_Name=".exe"*
 
 These events are derived from the Splunk botsv3 dataset.
