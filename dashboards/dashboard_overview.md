@@ -9,6 +9,8 @@
   | sort -_time
 - Visualization:
 <img width="1904" height="588" alt="admin_events" src="https://github.com/user-attachments/assets/95735028-53bd-43a0-a62a-59789af68462" />
+- Dashboard:
+<img width="1889" height="822" alt="admin_events_dashboard" src="https://github.com/user-attachments/assets/da69a8e3-3416-4135-a98e-4836faeaad05" />
 - Purpose: show recent admin creation / group adds.
 
 ## Panel 2 — Scheduled Task / Service Creation (B)
