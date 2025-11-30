@@ -7,7 +7,7 @@ Environment: Splunk Enterprise (Bots v3 Security Dataset)
 Classification: Potential Privilege Escalation Attempt
 Severity: Medium
 
-** 1. Executive Summary
+**1. Executive Summary
 
 On the Botsv3 Windows endpoint FYODOR-L, multiple account-modification events occurred within seconds, involving the user account FyodorMalteskesko, including assignment to the Administrators group.
 
