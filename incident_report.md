@@ -7,7 +7,7 @@ Environment: Splunk Enterprise (Bots v3 Security Dataset)
 Classification: Potential Privilege Escalation Attempt
 Severity: Medium
 
-1. Executive Summary
+** 1. Executive Summary
 
 On the Botsv3 Windows endpoint FYODOR-L, multiple account-modification events occurred within seconds, involving the user account FyodorMalteskesko, including assignment to the Administrators group.
 
@@ -65,7 +65,7 @@ T1134	Access Token Manipulation / Privilege Assignment	Account added to Administ
 These are top-tier SOC-relevant detections.
 
 5. Analysis & Interpretation
-🔸 Account: FyodorMalteskesko
+* Account: FyodorMalteskesko
 
 This account performed:
 
@@ -75,7 +75,7 @@ Direct assignment to Administrators
 
 Alterations of another account (svcvnc)
 
-🔸 Key Indicators:
+* Key Indicators:
 
 Speed (multiple privilege changes in seconds) indicates automated activity or an attacker with a script.
 
@@ -83,7 +83,7 @@ Administrators group modification is almost always malicious unless pre-authoriz
 
 Target account “svcvnc” looks like a service-related account → common lateral movement tactic.
 
-🔸 Impact Assessment:
+* Impact Assessment:
 
 If this were a live environment, the attacker could now:
 
@@ -97,7 +97,7 @@ Install backdoors
 
 Exfiltrate data
 
-🛠 6. Containment Recommendations
+6. Containment Recommendations
 
 If this were real, the SOC should immediately:
 
