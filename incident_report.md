@@ -1,4 +1,4 @@
-Incident Report – Unauthorized Privilege Escalation (Botsv3 Environment)
+****Incident Report – Unauthorized Privilege Escalation (Botsv3 Environment)****
 
 Report Version: 1.0
 Date Created: [Insert today’s date]
