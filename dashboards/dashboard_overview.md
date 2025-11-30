@@ -45,16 +45,3 @@ index=botsv3 EventCode=4663 Object_Type="File" Object_Name="*.exe"
 - Dashboard:
 <img width="1872" height="535" alt="executable_creation_dashboard" src="https://github.com/user-attachments/assets/0282538e-754b-429c-9834-f2de0c1e39f5" />
 - Purpose: identify droppers or malware.
-
-## Instructions to create dashboard in Splunk:
-1. Apps → Search & Reporting → Dashboards → Create New Dashboard
-2. Name: `SOC-Monitoring-MITRE`, permissions: shared/read
-3. Add new panel → paste the panel query → choose visualization → Save Panel.
-4. Repeat for all 4 panels.
-5. Save full dashboard → take a full-screen screenshot named `screenshots/12_dashboard_full.png`
-6. For each panel screenshot, crop the panel and save as:
-   - `screenshots/13_panel_admins.png`
-   - `screenshots/14_panel_tasks.png`
-   - `screenshots/15_panel_logons.png`
-   - `screenshots/16_panel_network.png`
-
