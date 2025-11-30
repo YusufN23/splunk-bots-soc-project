@@ -15,8 +15,7 @@ What to look for: who created the account, which account was added to which grou
 
 B. Persistence via Scheduled Task / Service Creation (EventCode 4698 / 7045)
 
-spl
-Copy code
+ 
 index=botsv3 (EventCode=4698 OR EventCode=7045)
 | table _time, Account_Name, TaskName, ServiceName, host
 | sort -_time
@@ -26,8 +25,7 @@ What to look for: new task/service names, which account created them, and host.
 
 C. Suspicious Login Times / Anomalous Logons (EventCode 4624)
 
-spl
-Copy code
+ 
 index=botsv3 EventCode=4624
 | eval hour=strftime(_time,"%H")
 | stats count by Account_Name, hour
@@ -39,8 +37,7 @@ What to look for: account names logging in at odd hours and frequency.
 
 D. Executable Creation / Potential Malware Dropped (EventCode 4663)
 
-spl
-Copy code
+ 
 index=botsv3 EventCode=4663 Object_Type="File" Object_Name="*.exe"
 | table _time, Account_Name, Object_Name, Object_Path, host
 | sort -_time
@@ -50,8 +47,7 @@ What to look for: new executables, suspicious paths (temp folders, user profiles
 
 E. Suspicious Network Connections / External Beaconing (netflow/firewall logs)
 
-spl
-Copy code
+ 
 index=botsv3 sourcetype=*netflow* OR sourcetype=*firewall*
 | stats count by src_ip, dest_ip, dest_port
 | where count > 5
@@ -60,8 +56,7 @@ Explanation: Identifies hosts making repeated connections to the same external d
 MITRE: T1071 (Application Layer Protocol)
 What to look for: dest_ip with high counts, unusual dest_ports, matching hosts.
 
-markdown
-Copy code
+ 
 
 **Important run notes (read before running any search):**
 
