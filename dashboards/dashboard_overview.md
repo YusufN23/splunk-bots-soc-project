@@ -31,6 +31,8 @@
   | sort -count
 - Visualization:
 <img width="1905" height="154" alt="image" src="https://github.com/user-attachments/assets/00dbc4a5-e457-4541-9b3d-62eebd492643" />
+- Dashboard:
+<img width="1873" height="372" alt="suspicious_logins_dashboard" src="https://github.com/user-attachments/assets/30650409-2e10-4087-95b8-bf5b7ef8613a" />
 - Purpose: highlight logins at odd hours.
 
 ## Panel 4 — Executable Creation (D)
@@ -40,6 +42,8 @@ index=botsv3 EventCode=4663 Object_Type="File" Object_Name="*.exe"
 | sort -_time
 - Visualization:
 <img width="1895" height="937" alt="exe_creation_results" src="https://github.com/user-attachments/assets/74f35244-cd71-4400-a716-c4bcd87890c0" />
+- Dashboard:
+<img width="1872" height="535" alt="executable_creation_dashboard" src="https://github.com/user-attachments/assets/0282538e-754b-429c-9834-f2de0c1e39f5" />
 - Purpose: identify droppers or malware.
 
 ## Instructions to create dashboard in Splunk:
