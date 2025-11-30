@@ -7,7 +7,7 @@ Environment: Splunk Enterprise (Bots v3 Security Dataset)
 Classification: Potential Privilege Escalation Attempt
 Severity: Medium
 
-**1. Executive Summary
+**1. Executive Summary**
 
 On the Botsv3 Windows endpoint FYODOR-L, multiple account-modification events occurred within seconds, involving the user account FyodorMalteskesko, including assignment to the Administrators group.
 
@@ -15,7 +15,7 @@ These events align with MITRE ATT&CK Privilege Escalation techniques (T1078, T11
 
 Although this is a lab dataset, the activity reflects a realistic attacker behavior pattern. This report analyzes the events, assesses impact, and provides recommended remediation.
 
-2. Timeline of Events
+**2. Timeline of Events**
 
 (All times from Splunk where you saw them)
 
