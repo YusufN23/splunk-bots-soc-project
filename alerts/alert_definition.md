@@ -1,5 +1,5 @@
 
-# Alert: Suspicious Power / Executable / Admin Activities (Examples)
+# Alert: Admin Activities / Scheduled Task / Executable
 
 ## Alert 1 — New Admin Added (High)
 **SPL:** (A)
